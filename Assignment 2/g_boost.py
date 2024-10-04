@@ -19,7 +19,7 @@ class GradientBooster:
 
         print('fit model')
         self.model.fit(self.xtrain, self.ytrain)
-        print('predict xtrain')
+        print('predict xtrain') 
         y_train_pred = self.model.predict(self.xtrain)
         print('xtrain done')
 
