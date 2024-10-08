@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.optim as optim
 
 class ElasticNet(nn.Module):
     def __init__(self, input_size, alpha=1.0, l1_ratio=0.5):
@@ -20,7 +21,7 @@ class ElasticNet(nn.Module):
         self.l1_ratio = l1_ratio
 
         # Define the linear regression layer
-        self.linear = nn.Linear(input_size, 1,bias=False,device=device,dtype=dtype)
+        self.linear = nn.Linear(input_size, 1,bias=False,device=torch.device('cpu'),dtype=torch.float64)
 
     def forward(self, x):
         """
@@ -118,7 +119,7 @@ class SqrtLasso(nn.Module):
 
 
         # Define the linear regression layer
-        self.linear = nn.Linear(input_size, 1,bias=False,device=device,dtype=dtype)
+        self.linear = nn.Linear(input_size, 1,bias=False,device=torch.device('cpu'),dtype= torch.float64)
 
     def forward(self, x):
         """
@@ -145,7 +146,7 @@ class SqrtLasso(nn.Module):
             Tensor: The loss.
 
         """
-        mse_loss = nn.MSELoss(reduction='mse')(y_pred, y_true)
+        mse_loss = nn.MSELoss()(y_pred, y_true)
         l1_reg = torch.norm(self.linear.weight, p=1,dtype=torch.float64)
         # l2_reg = torch.norm(self.linear.weight, p=2,dtype=torch.float64)
 
