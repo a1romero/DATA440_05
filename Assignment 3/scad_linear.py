@@ -2,9 +2,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-device = torch.device('cpu')
-dtype = torch.float64
-
 class SCADLinear(nn.Module):
     def __init__(self, input_size, lambda_val, a_val):
         super(SCADLinear, self).__init__() # init nn.Module
@@ -12,7 +9,7 @@ class SCADLinear(nn.Module):
         self.lambda_val = lambda_val
         self.a_val = a_val
 
-        self.linear = nn.Linear(input_size, 1, bias= False, device= device, dtype= dtype)
+        self.linear = nn.Linear(input_size, 1, bias= False, device= torch.device('cpu'), dtype= torch.float64)
 
     def forward(self, x): # how necessary is this?
         # train the linear model on x
