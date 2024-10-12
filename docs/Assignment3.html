@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+        <title>Assignment 3</title>
+    </head>
+
+    <main>
+        <body>
+            <h1>Assignment 3: Smoothly Clipped Absolute Deviation</h1>
+            <p>I created a class that implements the SCAD penalty for variable selection and regularization. 
+                This class was created in PyTorch.</p>
+            <h1></h1>
+            <h2>How SCAD works</h2>
+            <p>SCAD is a penalty function that is useful for correlated variables, because it encourages sparsity (predicted coefficients having a value of 0) in its predictions for coefficients. Its derivative is used for penalty functions.</p>          
+            
+            <h1></h1>
+            <h2>PyTorch</h2>
+            <p>Writing models in PyTorch makes them more efficient because of the way numpy (the typical alternative) stores data. However, it requires clever workarounds to be able to use typical machine learning tools.x</p>
+            <h1></h1>
+            <h2>Using Real Data for Variable Selection</h2>
+            <p>I wrote the SCADLinear class, which uses a linear regression model and the SCAD penalty to predict values.
+                The SCAD penalty selects variables based on their importance, which can be useful for highly correlated variables.
+                I used this class to predict the sugar content in cereals, using the <a href="https://www.kaggle.com/datasets/crawford/80-cereals">cereals</a> dataset.
+                The model is fairly successful at predicting sugar content, but it was important to confirm the best set of hyperparameters, so below is a chart of the variation in score based on a changing lambda value.
+            </p>
+            <img src="../Assignment 3/for_docs/params.png">
+
+            <h1></h1>
+            <h2>Using Generated Data with a Correlation Structure</h2>
+            <p>First, I generated 200 samples of strongly correlated data. SCADLinear seemed to consistently perform the best when compared to ElasticNet and Square root Lasso (which were introduced to us in class) on this set of strongly correlated data.
+                While all three models had scores within a close range of each other (between 2 and 3), SCADLinear seemed to always have the lowest mean squared error.
+                Additionally, SCADLinear's coefficients seemed to most closely match the actual coefficients specified in beta star (the original/"correct" coefficients).
+                I mapped the absolute difference from the original coefficients for each of the three models to display just how precise SCADLinear was in comparison to the other models.
+            </p>
+            <img src="../Assignment 3/for_docs/absolute_comparison.png">
+
+            <h1></h1>
+            <h2>Quadratic interaction terms and the Concrete Dataset</h2>
+            <p>I determined that the best weights for SCAD did not vary too much within the parameters of [0.001, 0.01, 0.1] for lambda and [2.0, 3.0, 4.0] for a.
+                Because SCADLinear was written with PyTorch and was missing some scikit-learn compliant functions, I had to write my own model for a simple hyperparameter search.
+                However, this could be an opportunity for further investigation, as perhaps the learning rate of the model is an important factor. I did 10-fold cross-validation on the concrete dataset with quadratic interaction
+                terms (which I added using scikit-learn's PolynomialFeatures). The majority of iterations found that there were 44 important coefficients (with a threshold of 0.01 considered closest to zero), although sometimes one coefficient was deemed unnecessary, lowering the number of coefficients to 43.
+                This exception did not occur on the final test of the data, but the plot is included here to show that there is a minor outlier. The last run of every k-fold had an unusually high score, which could be due to a fitting error. However, most other scores were fairly consistent.
+                Below is the map of the number of coefficients greater than zero versus the score.
+            </p>
+            <img src="../Assignment 3/for_docs/coef_plot.png">
+
+            <p>The code for this project is this <a href=https://github.com/a1romero/DATA440_05/tree/main/Assignment%203>github repo</a>, and you can also find a HTML version <a href="Assignment3_example.html">here</a>. The scad_linear file contains my SCADLinear class.</p>
+        </body>
+    </main>
+</html>
