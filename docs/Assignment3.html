@@ -19,7 +19,7 @@
             
             <h1></h1>
             <h2>PyTorch</h2>
-            <p>Writing models in PyTorch makes them more efficient because of the way numpy (the typical alternative) stores data. However, it requires clever workarounds to be able to use typical machine learning tools.x</p>
+            <p>Writing models in PyTorch makes them more efficient because of the way numpy (the typical alternative) stores data. However, it requires clever workarounds to be able to use typical machine learning tools.</p>
             <h1></h1>
             <h2>Using Real Data for Variable Selection</h2>
             <p>I wrote the SCADLinear class, which uses a linear regression model and the SCAD penalty to predict values.
@@ -27,7 +27,7 @@
                 I used this class to predict the sugar content in cereals, using the <a href="https://www.kaggle.com/datasets/crawford/80-cereals">cereals</a> dataset.
                 The model is fairly successful at predicting sugar content, but it was important to confirm the best set of hyperparameters, so below is a chart of the variation in score based on a changing lambda value.
             </p>
-            <img src="../Assignment 3/for_docs/params.png">
+            <img src="../Assignment_3/for_docs/params.png">
 
             <h1></h1>
             <h2>Using Generated Data with a Correlation Structure</h2>
@@ -36,7 +36,7 @@
                 Additionally, SCADLinear's coefficients seemed to most closely match the actual coefficients specified in beta star (the original/"correct" coefficients).
                 I mapped the absolute difference from the original coefficients for each of the three models to display just how precise SCADLinear was in comparison to the other models.
             </p>
-            <img src="../Assignment 3/for_docs/absolute_comparison.png">
+            <img src="../Assignment_3/for_docs/absolute_comparison.png">
 
             <h1></h1>
             <h2>Quadratic interaction terms and the Concrete Dataset</h2>
@@ -47,9 +47,9 @@
                 This exception did not occur on the final test of the data, but the plot is included here to show that there is a minor outlier. The last run of every k-fold had an unusually high score, which could be due to a fitting error. However, most other scores were fairly consistent.
                 Below is the map of the number of coefficients greater than zero versus the score.
             </p>
-            <img src="../Assignment 3/for_docs/coef_plot.png">
+            <img src="../Assignment_3/for_docs/coef_plot.png">
 
-            <p>The code for this project is this <a href=https://github.com/a1romero/DATA440_05/tree/main/Assignment%203>github repo</a>, and you can also find a HTML version <a href="Assignment3_example.html">here</a>. The scad_linear file contains my SCADLinear class.</p>
+            <p>The code for this project is this <a href="">github repo</a>, and you can also find a HTML version <a href="Assignment3_example.html">here</a>. The scad_linear file contains my SCADLinear class.</p>
         </body>
     </main>
 </html>
