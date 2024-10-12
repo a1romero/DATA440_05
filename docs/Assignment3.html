@@ -36,7 +36,7 @@
             <p>First, I generated 200 samples of strongly correlated data. SCADLinear seemed to consistently perform the best when compared to ElasticNet and Square root Lasso (which were introduced to us in class) on this set of strongly correlated data.
                 While all three models had scores within a close range of each other (between 2 and 3), SCADLinear seemed to always have the lowest mean squared error.
                 Additionally, SCADLinear's coefficients seemed to most closely match the actual coefficients specified in beta star (the original/"correct" coefficients).
-                I mapped the absolute difference from the original coefficients for each of the three models to display just how precise SCADLinear was in comparison to the other models.
+                I mapped the absolute difference from the original coefficients for each of the three models' predicted coefficients to display just how precise SCADLinear was in comparison to the other models.
             </p>
             <figure>
             <img src="absolute_comparison.png"/>
@@ -49,7 +49,7 @@
                 However, this could be an opportunity for further investigation, as perhaps the learning rate of the model is an important factor. I did 10-fold cross-validation on the concrete dataset with quadratic interaction
                 terms (which I added using scikit-learn's PolynomialFeatures). The majority of iterations found that there were 44 important coefficients (with a threshold of 0.01 considered closest to zero), although sometimes one coefficient was deemed unnecessary, lowering the number of coefficients to 43.
                 This exception did not occur on the final test of the data, but the plot is included here to show that there is a minor outlier. The last run of every k-fold had an unusually high score, which could be due to a fitting error. However, most other scores were fairly consistent.
-                Below is the map of the number of coefficients greater than zero versus the score.
+                Below is a plot of the number of coefficients greater than zero versus the score.
             </p>
             <figure>
             <img src="coef_plot.png">
